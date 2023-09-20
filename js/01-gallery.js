@@ -6,7 +6,7 @@ const galleryList = document.querySelector(".gallery");
 const markup = galleryItems
   .map(
     ({ preview, original, description }) =>
-      `<div class="gallery__item">
+      `<li><div class="gallery__item">
   <a class="gallery__link" href="${original}">
     <img
       class="gallery__image"
@@ -15,7 +15,7 @@ const markup = galleryItems
       alt="${description}"
     />
   </a>
-</div>`
+</div></li>`
   )
   .join("");
 
@@ -32,9 +32,11 @@ function openLargerPicture(event) {
   `);
   instance.show();
 
-  document.addEventListener("keydown", (e) => {
-    if (instance.visible() && e.key === "Escape") {
-      instance.close();
-    }
-  });
+  if (instance.visible()) {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        instance.close();
+      }
+    });
+  }
 }
